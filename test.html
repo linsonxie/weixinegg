@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>测试页面</title>
+    <link rel="stylesheet" href="css/test.css"/>
+    <link rel="stylesheet" href="css/weui.min.css"/>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="js/test.js"></script>
+</head>
+<body>
+<div class="page">
+    <div class="hd">
+        <h1 class="page_title">WeUI注册</h1>
+    </div>
+    <div class="bd">
+        <div class="weui_cells_title">信息注册</div>
+        <form id="data_form" method="post">
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">姓名：</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input name="name" class="weui_input" type="text" placeholder="请输入姓名"/>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">手机号码：</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input name="tel" class="weui_input" type="tel" placeholder="请输入手机号码"/>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">QQ号码：</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input name="qq" class="weui_input" type="tel" placeholder="请输入QQ号"/>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">银行卡：</div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input name="card" class="weui_input" type="tel" placeholder="请输入银行卡号"/>
+                    </div>
+                </div>
+                <div class="weui_cells_title">性别</div>
+                <div class="weui_cells weui_cells_radio">
+                    <label class="weui_cell weui_check_label" for="x11">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>男</p>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <input type="radio" class="weui_check" name="radio1" id="x11" checked="checked">
+                            <span class="weui_icon_checked"></span>
+                        </div>
+                    </label>
+                    <label class="weui_cell weui_check_label" for="x12">
+
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>女</p>
+                        </div>
+                        <div class="weui_cell_ft">
+                            <input type="radio" name="radio1" class="weui_check" id="x12">
+                            <span class="weui_icon_checked"></span>
+                        </div>
+                    </label>
+                </div>
+                <div class="weui_cell weui_cell_select weui_select_after">
+                    <div class="weui_cell_hd">
+                        所在城市：
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" name="city">
+                            <option value="1">广州</option>
+                            <option value="2">北京</option>
+                            <option value="3">武汉</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="weui_cells_title">自我介绍：</div>
+                <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <textarea name="introduce" class="weui_textarea" placeholder="请输入自我介绍，200字以内"
+                                      rows="3"></textarea>
+                            <div class="weui_textarea_counter"><span>0</span>/200</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div class="weui_uploader">
+                            <div class="weui_uploader_hd weui_cell">
+                                <div class="weui_cell_bd weui_cell_primary">图片上传</div>
+                            </div>
+                            <div class="weui_uploader_bd">
+                                <ul id="pics" class="weui_uploader_files">
+                                </ul>
+                                <div id="choosePicBtn" class="weui_uploader_input_wrp"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="weui_btn_area" style="margin-bottom: 15px">
+            <a class="weui_btn weui_btn_primary" href="javascript:" id="submitBtn">提交</a>
+        </div>
+    </div>
+</div>
+
+<div class="weui_toptips weui_warn js_tooltips">格式不对</div>
+
+<div id="toast" style="display: none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content">提交成功</p>
+    </div>
+</div>
+<!--end toast-->
+
+<!--BEGIN dialog1-->
+<div class="weui_dialog_confirm" id="dialog1" style="display: none;">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">提示</strong></div>
+        <div class="weui_dialog_bd">确定提交吗</div>
+        <div class="weui_dialog_ft">
+            <a href="javascript:;" class="weui_btn_dialog default">取消</a>
+            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+<!--END dialog1-->
+
+<!-- loading toast -->
+<div id="loadingToast" class="weui_loading_toast" style="display:none;">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <div class="weui_loading">
+            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+        </div>
+        <p class="weui_toast_content">正在提交...</p>
+    </div>
+</div>
+</body>
+</html>
